@@ -1,25 +1,41 @@
 <template>
-  <h1>Игра "Угадай карточку"</h1>
+  <div class="page">
+    <h1>"Найди одинаковые карточки"</h1>
 
-  <div>
-    <input
-      v-model="cardsCount"
-      type="range"
-      id="card-count"
-      min="4"
-      max="40"
-      step="2"
-    />
-    <label for="card-count">Выберите количество карточек</label>
+    <section class="game">
+      <div class="game__config">
+        <form>
+          <input
+            v-model="cardsCount"
+            type="range"
+            id="card-count"
+            min="4"
+            max="40"
+            step="2"
+          />
+          <label for="card-count">Выберите количество карточек</label>
+        </form>
+        <button @click="startGame" type="button" class="game__start-btn">
+          Начать игру (карточек - {{ cardsCount }})
+        </button>
+      </div>
+
+      <div class="game__result">
+        <h2>Ход игры</h2>
+        <p>Таймер:</p>
+        <p>Лучший результат:</p>
+        <p>Кол-во ходов:</p>
+      </div>
+
+    </section>
+
+    <section class="cards">
+      <ul @click="selectCard" class="cards__list">
+        <li v-for="(color, idx) in cards" :key="idx" :id="idx" class="cards__item"></li>
+      </ul>
+    </section>
+
   </div>
-
-  <button @click="startGame" type="button">
-    Начать игру (карточек - {{ cardsCount }})
-  </button>
-
-  <ul @click="selectCard">
-    <li v-for="(color, idx) in cards" :key="idx" :id="idx" class="card__item"></li>
-  </ul>
 </template>
 
 <script>
@@ -76,16 +92,16 @@ export default {
       }
       const [compareId, compareColor, compareTargetEl] = this.compareCardsArr;
       if (id === compareId) {
-        return
+        return;
       } else {
         if (color === compareColor) {
-          console.log('Цвет совпал');
+          console.log("Цвет совпал");
           targetEl.classList.add("disabled");
           compareTargetEl.classList.add("disabled");
           this.compareCardsArr = [];
         } else {
-          targetEl.style.backgroundColor = 'black';
-          compareTargetEl.style.backgroundColor = 'black';
+          targetEl.style.backgroundColor = "black";
+          compareTargetEl.style.backgroundColor = "black";
           this.compareCardsArr = [];
         }
       }
@@ -93,7 +109,7 @@ export default {
 
     selectCard(evt) {
       const targetEl = evt.target;
-      if (!targetEl.classList.contains("card__item")) {
+      if (!targetEl.classList.contains("cards__item")) {
         return;
       }
       const id = evt.target.id;
@@ -101,7 +117,7 @@ export default {
       targetEl.style.backgroundColor = color;
       setTimeout(() => {
         this.compareCards(id, color, targetEl);
-      },1500);
+      }, 1500);
 
     }
   }
@@ -109,16 +125,35 @@ export default {
 </script>
 
 <style>
-p,
-label {
-  font: 1rem "Fira Sans", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  max-width: 560px;
+  margin: 0 auto;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.game {
+  display: flex;
+  justify-content: space-between;
+}
+
+.game__config {
+  max-width: 250px;
+}
+
+.game__result {
+  max-width: 250px;
 }
 
 input {
   margin: 0.4rem;
 }
 
-button {
+.game__start-btn {
   border: 3px solid #006089;
   border-radius: 5px;
   font-size: 16px;
@@ -126,7 +161,7 @@ button {
   margin: 20px;
 }
 
-.card__item {
+.cards__item {
   width: 100px;
   height: 100px;
   color: white;
@@ -135,18 +170,19 @@ button {
   justify-content: center;
   font-size: 24px;
   background-color: black;
-  border-radius: 5px;
+  /*border-radius: 5px;*/
   transition: transform 0.4s, background-color 0.7s;
 }
 
-.card__item:hover {
+.cards__item:hover {
   transform: scale(1.05);
 }
 
 ul {
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 100px);
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 100px);
   gap: 15px;
   margin: 0;
   padding: 0;
@@ -154,7 +190,7 @@ ul {
 
 .disabled {
   pointer-events: none;
-  /*border-radius: 50%;*/
+  border-radius: 50%;
   opacity: 0.2;
 }
 </style>
