@@ -1,6 +1,8 @@
 # Игра "Угадай карточку"
 `играй и выигрывай!!!`
 
+https://guess-the-card-87897.web.app
+
 ## Project setup
 ```
 npm install
