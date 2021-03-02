@@ -4,7 +4,7 @@
 
     <section class="game">
       <div class="game__config">
-        <form>
+        <form class="game__form">
           <input
             v-model="cardsCount"
             type="range"
@@ -74,14 +74,17 @@ export default {
   data() {
     return {
       cards: [],
-      cardsCount: "4",
+      cardsCount: "10",
       compareCardsArr: []
     };
   },
 
   methods: {
     startGame() {
-      this.cards = [...makeCards(this.cardsCount)];
+      this.cards = [];
+      setTimeout( ()=> {
+        this.cards = [...makeCards(this.cardsCount)];
+      }, 0)
     },
 
     compareCards(id, color, targetEl) {
@@ -96,8 +99,8 @@ export default {
       } else {
         if (color === compareColor) {
           console.log("Цвет совпал");
-          targetEl.classList.add("disabled");
-          compareTargetEl.classList.add("disabled");
+          targetEl.classList.add("cards__item_disabled");
+          compareTargetEl.classList.add("cards__item_disabled");
           this.compareCardsArr = [];
         } else {
           targetEl.style.backgroundColor = "black";
@@ -118,7 +121,6 @@ export default {
       setTimeout(() => {
         this.compareCards(id, color, targetEl);
       }, 1500);
-
     }
   }
 };
@@ -136,9 +138,18 @@ export default {
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
+h1 {
+  margin: 15px auto;
+  text-align: center;
+}
+
 .game {
   display: flex;
   justify-content: space-between;
+}
+
+.game__form {
+  margin-left: 20px;
 }
 
 .game__config {
@@ -150,13 +161,14 @@ export default {
 }
 
 input {
-  margin: 0.4rem;
+  /*margin: 20px;*/
+  width: 200px;
 }
 
 .game__start-btn {
   border: 3px solid #006089;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 15px;
   padding: 15px 50px;
   margin: 20px;
 }
@@ -178,7 +190,7 @@ input {
   transform: scale(1.05);
 }
 
-ul {
+.cards__list {
   list-style-type: none;
   display: grid;
   justify-content: center;
@@ -188,9 +200,8 @@ ul {
   padding: 0;
 }
 
-.disabled {
+.cards__item_disabled {
   pointer-events: none;
-  border-radius: 50%;
   opacity: 0.2;
 }
 </style>
