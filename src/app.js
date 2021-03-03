@@ -122,7 +122,7 @@ export default {
     },
 
     saveBestResult() {
-      const result = JSON.parse(localStorage.getItem(APPNAME));
+      const result = JSON.parse(localStorage.getItem(APPNAME)) || {};
       const bestResult = result[this.cardsCount] || 0;
       if (bestResult === 0 || this.stepCount < bestResult) {
         result[this.cardsCount] = this.stepCount;
@@ -131,7 +131,7 @@ export default {
     },
 
     loadBestResult() {
-      const result = JSON.parse(localStorage.getItem(APPNAME));
+      const result = JSON.parse(localStorage.getItem(APPNAME)) || {};
       const bestResult = result[this.cardsCount];
       this.bestResult = bestResult || 0;
     }
