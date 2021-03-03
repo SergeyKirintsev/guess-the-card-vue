@@ -49,7 +49,11 @@ function shuffle(array) {
 }
 
 function makeCards(cardsCount) {
-  const colorArr = ["red", "green", "blue", "gold", "gray"];
+  const colorArr = [
+    "#74d2e7", "#84bd00", "#efdf00", "#fe5000",
+    "#da1884", "#a51890", "#0077c8", "#008eaa",
+    "#005670", "#009f4d", "#e4002b", "#5e412f"
+  ];
   const cardsArr = [];
 
   let colorPosition = 0;
