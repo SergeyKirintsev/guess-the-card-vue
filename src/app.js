@@ -89,9 +89,7 @@ export default {
           targetEl.classList.add("cards__item_disabled");
           compareTargetEl.classList.add("cards__item_disabled");
           this.guessCardsCount += 2;
-          setTimeout(() => {
-            this.checkStopGame();
-          }, 500);
+          this.checkStopGame();
         } else {
           targetEl.style.backgroundColor = BACKGROUNDCOLOR;
           compareTargetEl.style.backgroundColor = BACKGROUNDCOLOR;
@@ -116,16 +114,20 @@ export default {
 
     checkStopGame() {
       if (this.cardsCount == this.guessCardsCount) {
-        this.saveBestResult();
-        alert(`Игра окончена. Ваш результат ${this.stepCount} ходов`);
+        setTimeout(() => this.saveBestResult(), 0);
+        setTimeout(() => {
+          alert(`Игра окончена. Ваш результат ${this.stepCount} ходов`);
+        }, 0);
       }
     },
 
     saveBestResult() {
-      const result = {
-        [this.cardsCount]: this.stepCount
-      };
-      localStorage.setItem(APPNAME, JSON.stringify(result));
+      const result = JSON.parse(localStorage.getItem(APPNAME));
+      const bestResult = result[this.cardsCount] || 0;
+      if (bestResult === 0 || this.stepCount < bestResult) {
+        result[this.cardsCount] = this.stepCount;
+        localStorage.setItem(APPNAME, JSON.stringify(result));
+      }
     },
 
     loadBestResult() {
