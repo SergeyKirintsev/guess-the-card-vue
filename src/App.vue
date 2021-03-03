@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <h1>"Найди одинаковые карточки"</h1>
+    <h1>Найди одинаковые карточки</h1>
 
     <section class="game">
       <div class="game__config">
@@ -21,10 +21,10 @@
       </div>
 
       <div class="game__result">
-        <h2>Ход игры</h2>
+        <h2>Ваш результат</h2>
         <p>Таймер:</p>
         <p>Лучший результат:</p>
-        <p>
+        <p class="color-accent">
           Кол-во ходов: <mark>{{ stepCount }}</mark>
         </p>
         <p>Угадано: {{ guessCardsCount }}</p>
