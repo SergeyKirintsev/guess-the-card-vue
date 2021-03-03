@@ -46,6 +46,8 @@
 </template>
 
 <script>
+const BACKGROUNDCOLOR = '#fff';
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -136,8 +138,8 @@ export default {
             this.checkStopGame();
           }, 500);
         } else {
-          targetEl.style.backgroundColor = "black";
-          compareTargetEl.style.backgroundColor = "black";
+          targetEl.style.backgroundColor = BACKGROUNDCOLOR;
+          compareTargetEl.style.backgroundColor = BACKGROUNDCOLOR;
         }
         this.compareCardsArr = [];
         this.stepCount++;
