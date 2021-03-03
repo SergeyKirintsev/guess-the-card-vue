@@ -4,6 +4,7 @@
 
     <section class="game">
       <div class="game__config">
+        <p class="game__cards-count">{{ cardsCount }}</p>
         <form class="game__form">
           <input
             v-model="cardsCount"
@@ -16,18 +17,18 @@
           <label for="card-count">Выберите количество карточек</label>
         </form>
         <button @click="startGame" type="button" class="game__start-btn">
-          Начать игру (карточек - {{ cardsCount }})
+          Начать игру
         </button>
       </div>
 
       <div class="game__result">
         <h2>Ваш результат</h2>
-        <p>Таймер:</p>
-        <p>
-          Лучший результат: <mark>{{ bestResult }}</mark>
+        <p>Таймер: <span class="timer">0</span></p>
+        <p class="color-accent">
+          Лучший результат: <span class="text-accent">{{ bestResult }}</span>
         </p>
         <p class="color-accent">
-          Кол-во ходов: <mark>{{ stepCount }}</mark>
+          Кол-во ходов: <span class="text-accent">{{ stepCount }}</span>
         </p>
         <p>Угадано: {{ guessCardsCount }}</p>
         <p>Осталось: {{ cardsCount - guessCardsCount }}</p>

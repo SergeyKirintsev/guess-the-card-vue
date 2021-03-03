@@ -1,5 +1,15 @@
 const BACKGROUNDCOLOR = "#fff";
 const APPNAME = "darkweb";
+let setIntervalId;
+
+function startTimer() {
+  setIntervalId = setInterval(() => {
+    let timerEl = document.querySelector('.timer')
+    let timerCount = parseInt(timerEl.textContent, 10)
+    timerCount += 1
+    timerEl.textContent = timerCount.toString() + ' сек.'
+  }, 1000)
+}
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -63,6 +73,8 @@ export default {
       this.cards = [];
       this.stepCount = 0;
       this.guessCardsCount = 0;
+      let timerEl = document.querySelector('.timer')
+      timerEl.textContent = '0'
     },
 
     startGame() {
@@ -71,6 +83,7 @@ export default {
       setTimeout(() => {
         this.cards = [...makeCards(this.cardsCount)];
       }, 0);
+      startTimer()
     },
 
     compareCards(id, color, targetEl) {
@@ -115,6 +128,7 @@ export default {
     checkStopGame() {
       if (this.cardsCount == this.guessCardsCount) {
         setTimeout(() => this.saveBestResult(), 0);
+        clearInterval(setIntervalId)
         setTimeout(() => {
           alert(`Игра окончена. Ваш результат ${this.stepCount} ходов`);
         }, 0);
