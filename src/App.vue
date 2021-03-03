@@ -24,19 +24,24 @@
         <h2>Ход игры</h2>
         <p>Таймер:</p>
         <p>Лучший результат:</p>
-        <p>Кол-во ходов: <mark>{{ stepCount }}</mark></p>
-        <p>Угадано: {{guessCardsCount}}</p>
-        <p>Осталось: {{cardsCount - guessCardsCount}}</p>
+        <p>
+          Кол-во ходов: <mark>{{ stepCount }}</mark>
+        </p>
+        <p>Угадано: {{ guessCardsCount }}</p>
+        <p>Осталось: {{ cardsCount - guessCardsCount }}</p>
       </div>
-
     </section>
 
     <section class="cards">
       <ul @click="selectCard" class="cards__list">
-        <li v-for="(color, idx) in cards" :key="idx" :id="idx" class="cards__item"></li>
+        <li
+          v-for="(color, idx) in cards"
+          :key="idx"
+          :id="idx"
+          class="cards__item"
+        ></li>
       </ul>
     </section>
-
   </div>
 </template>
 
@@ -50,20 +55,29 @@ function shuffle(array) {
 
 function makeCards(cardsCount) {
   const colorArr = [
-    "#74d2e7", "#84bd00", "#efdf00", "#fe5000",
-    "#da1884", "#a51890", "#0077c8", "#008eaa",
-    "#005670", "#009f4d", "#e4002b", "#5e412f"
+    "#74d2e7",
+    "#84bd00",
+    "#efdf00",
+    "#fe5000",
+    "#da1884",
+    "#a51890",
+    "#0077c8",
+    "#008eaa",
+    "#005670",
+    "#009f4d",
+    "#e4002b",
+    "#5e412f"
   ];
   shuffle(colorArr);
-  const cardsArr = [];
+  const cardsArr = new Array(+cardsCount);
 
   let colorPosition = 0;
 
-  for (let i = 0; i < cardsCount / 2; i++) {
+  for (let i = 0; i < cardsArr.length / 2; i++) {
     const color = colorArr[colorPosition];
 
     cardsArr[i] = color;
-    cardsArr[cardsCount / 2 + i] = color;
+    cardsArr[cardsArr.length - 1 - i] = color;
 
     if (colorPosition === colorArr.length - 1) {
       colorPosition = 0;
@@ -97,9 +111,9 @@ export default {
 
     startGame() {
       this.resetGame();
-      setTimeout( ()=> {
+      setTimeout(() => {
         this.cards = [...makeCards(this.cardsCount)];
-      }, 0)
+      }, 0);
     },
 
     compareCards(id, color, targetEl) {
@@ -118,9 +132,9 @@ export default {
           targetEl.classList.add("cards__item_disabled");
           compareTargetEl.classList.add("cards__item_disabled");
           this.guessCardsCount += 2;
-          setTimeout(()=>{
+          setTimeout(() => {
             this.checkStopGame();
-          }, 500)
+          }, 500);
         } else {
           targetEl.style.backgroundColor = "black";
           compareTargetEl.style.backgroundColor = "black";

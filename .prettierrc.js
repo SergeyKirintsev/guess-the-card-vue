@@ -1,4 +1,3 @@
 module.exports = {
-    trailingComma: false
+  trailingComma: false
 };
-  
