@@ -54,6 +54,7 @@ function makeCards(cardsCount) {
     "#da1884", "#a51890", "#0077c8", "#008eaa",
     "#005670", "#009f4d", "#e4002b", "#5e412f"
   ];
+  shuffle(colorArr);
   const cardsArr = [];
 
   let colorPosition = 0;
@@ -112,21 +113,20 @@ export default {
       if (id === compareId) {
         return;
       } else {
-        this.stepCount++;
         if (color === compareColor) {
           // console.log("Цвет совпал");
           targetEl.classList.add("cards__item_disabled");
           compareTargetEl.classList.add("cards__item_disabled");
-          this.compareCardsArr = [];
           this.guessCardsCount += 2;
           setTimeout(()=>{
             this.checkStopGame();
-          }, 0)
+          }, 500)
         } else {
           targetEl.style.backgroundColor = "black";
           compareTargetEl.style.backgroundColor = "black";
-          this.compareCardsArr = [];
         }
+        this.compareCardsArr = [];
+        this.stepCount++;
       }
     },
 
