@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <!-- Попап -->
-    <div class="popup">
+    <div :class="{ popup_opened: isShowPopup }" class="popup">
       <div class="popup__content">
         <p class="popup__title">Неплохо!</p>
         <div class="game__result game__result_place_popup">
@@ -18,7 +18,9 @@
           <p>Угадано: {{ guessCardsCount }}</p>
           <p>Осталось: {{ cardsCount - guessCardsCount }}</p>
         </div>
-        <button type="button" class="popup__close-btn">Продолжить</button>
+        <button @click="closePopup" type="button" class="popup__close-btn">
+          Продолжить
+        </button>
       </div>
     </div>
 

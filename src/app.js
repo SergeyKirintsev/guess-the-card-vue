@@ -1,7 +1,5 @@
 const BACKGROUNDCOLOR = "#c8d6e5";
 const APPNAME = "darkweb";
-let setIntervalId;
-let popup;
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -58,6 +56,8 @@ export default {
       guessCardsCount: 0,
       bestResult: 0,
       timerCount: 0,
+      isShowPopup: false,
+      setIntervalId: null
     };
   },
 
@@ -66,9 +66,8 @@ export default {
       this.cards = [];
       this.stepCount = 0;
       this.guessCardsCount = 0;
-      let timerEl = document.querySelector(".timer");
-      timerEl.textContent = "0";
-      clearInterval(setIntervalId);
+      clearInterval(this.setIntervalId);
+      this.timerCount = 0;
     },
 
     startGame() {
@@ -81,9 +80,7 @@ export default {
     },
 
     compareCards(id, color, targetEl) {
-      // console.log(id, color);
       if (this.compareCardsArr.length === 0) {
-        // this.stepCount++;
         this.compareCardsArr = [id, color, targetEl];
         return;
       }
@@ -92,7 +89,6 @@ export default {
         return;
       } else {
         if (color === compareColor) {
-          // console.log("Цвет совпал");
           targetEl.classList.add("cards__item_disabled");
           compareTargetEl.classList.add("cards__item_disabled");
           this.guessCardsCount += 2;
@@ -126,13 +122,17 @@ export default {
     },
 
     openPopup() {
-      popup.classList.add("popup_opened");
+      this.isShowPopup = true;
+    },
+
+    closePopup() {
+      this.isShowPopup = false;
     },
 
     checkStopGame() {
       if (this.cardsCount == this.guessCardsCount) {
         setTimeout(() => this.saveBestResult(), 0);
-        clearInterval(setIntervalId);
+        clearInterval(this.setIntervalId);
         setTimeout(() => this.openPopup(), 1000);
       }
     },
@@ -153,17 +153,9 @@ export default {
     },
 
     startTimer() {
-      setIntervalId = setInterval(() => {
-        this.timerCount++
+      this.setIntervalId = setInterval(() => {
+        this.timerCount++;
       }, 1000);
     }
-  },
-
-  mounted() {
-    popup = document.querySelector(".popup");
-    const closePopupBtn = document.querySelector(".popup__close-btn");
-    closePopupBtn.addEventListener("click", () => {
-      popup.classList.remove("popup_opened");
-    });
   }
 };
