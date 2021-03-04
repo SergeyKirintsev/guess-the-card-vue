@@ -4,7 +4,7 @@
     <div class="popup">
       <div class="popup__content">
         <p class="popup__title">Неплохо!</p>
-        <p class="popup__text"></p>
+        <p class="popup__text">Ваш результат {{ this.stepCount }} ходов</p>
         <button type="button" class="popup__close-btn">Продолжить</button>
       </div>
     </div>

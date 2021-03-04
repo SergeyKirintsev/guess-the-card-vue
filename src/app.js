@@ -4,11 +4,11 @@ let setIntervalId;
 
 function startTimer() {
   setIntervalId = setInterval(() => {
-    let timerEl = document.querySelector('.timer')
-    let timerCount = parseInt(timerEl.textContent, 10)
-    timerCount += 1
-    timerEl.textContent = timerCount.toString() + ' сек.'
-  }, 1000)
+    let timerEl = document.querySelector(".timer");
+    let timerCount = parseInt(timerEl.textContent, 10);
+    timerCount += 1;
+    timerEl.textContent = timerCount.toString() + " сек.";
+  }, 1000);
 }
 
 function shuffle(array) {
@@ -73,8 +73,9 @@ export default {
       this.cards = [];
       this.stepCount = 0;
       this.guessCardsCount = 0;
-      let timerEl = document.querySelector('.timer')
-      timerEl.textContent = '0'
+      let timerEl = document.querySelector(".timer");
+      timerEl.textContent = "0";
+      clearInterval(setIntervalId);
     },
 
     startGame() {
@@ -83,13 +84,13 @@ export default {
       setTimeout(() => {
         this.cards = [...makeCards(this.cardsCount)];
       }, 0);
-      startTimer()
+      startTimer();
     },
 
     compareCards(id, color, targetEl) {
       // console.log(id, color);
       if (this.compareCardsArr.length === 0) {
-        this.stepCount++;
+        // this.stepCount++;
         this.compareCardsArr = [id, color, targetEl];
         return;
       }
@@ -106,10 +107,10 @@ export default {
         } else {
           targetEl.style.backgroundColor = BACKGROUNDCOLOR;
           compareTargetEl.style.backgroundColor = BACKGROUNDCOLOR;
-          targetEl.classList.remove('cards__item_active')
-          compareTargetEl.classList.remove('cards__item_active')
-          targetEl.classList.add('cards__item_picture')
-          compareTargetEl.classList.add('cards__item_picture')
+          targetEl.classList.remove("cards__item_active");
+          compareTargetEl.classList.remove("cards__item_active");
+          targetEl.classList.add("cards__item_picture");
+          compareTargetEl.classList.add("cards__item_picture");
         }
         this.compareCardsArr = [];
         this.stepCount++;
@@ -121,8 +122,8 @@ export default {
       if (!targetEl.classList.contains("cards__item")) {
         return;
       }
-      targetEl.classList.add('cards__item_active')
-      targetEl.classList.remove('cards__item_picture')
+      targetEl.classList.add("cards__item_active");
+      targetEl.classList.remove("cards__item_picture");
       const id = evt.target.id;
       const color = this.cards[id];
       targetEl.style.backgroundColor = color;
@@ -134,21 +135,21 @@ export default {
     checkStopGame() {
       if (this.cardsCount == this.guessCardsCount) {
         setTimeout(() => this.saveBestResult(), 0);
-        clearInterval(setIntervalId)
+        clearInterval(setIntervalId);
         setTimeout(() => {
           // Наверняка можно сделать лучше
-          const popup = document.querySelector('.popup');
-          const popupText = document.querySelector('.popup__text')
-          const closePopupBtn = document.querySelector('.popup__close-btn')
-          popupText.textContent = `Ваш результат ${this.stepCount} ходов`
+          const popup = document.querySelector(".popup");
+          // const popupText = document.querySelector('.popup__text')
+          const closePopupBtn = document.querySelector(".popup__close-btn");
+          // popupText.textContent = `Ваш результат ${this.stepCount} ходов`
           function showPopup() {
-            popup.classList.add('popup_opened');
+            popup.classList.add("popup_opened");
           }
           function closePopup() {
-            popup.classList.remove('popup_opened');
+            popup.classList.remove("popup_opened");
           }
+          closePopupBtn.addEventListener("click", closePopup);
           showPopup();
-          closePopupBtn.addEventListener('click', closePopup)
           // alert(`Игра окончена. Ваш результат ${this.stepCount} ходов`);
         }, 0);
       }
