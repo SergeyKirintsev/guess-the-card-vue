@@ -22,12 +22,82 @@ body {
     padding: 40px 0;
 }
 
-h1 {
+.popup {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2a2c2f;
+    z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s ease;
+}
+
+.popup_opened {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup__content {
+    box-sizing: border-box;
+    padding: 0 40px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.popup__title {
+    margin: 0 0 20px 0;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.popup__text {
+    margin: 0 0 20px 0;
+    max-width: 520px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.popup__close-btn {
+    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 15px 0;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background-color: transparent;
+    outline: none;
+    transition: .2s ease;
+}
+
+.popup__close-btn:hover {
+    color: #1dd1a1;
+    border-color: #1dd1a1;
+    cursor: pointer;
+}
+
+.title {
     margin: 0;
     font-size: 32px;
     font-weight: 700;
     text-transform: uppercase;
     text-align: center;
+}
+
+.copyright {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 .game {
@@ -70,14 +140,11 @@ h1 {
 
 .game__result p {
     margin: 0 0 10px 0;
+    font-weight: 500;
 }
 
 .game__result p:last-child {
     margin-bottom: 0;
-}
-
-.timer {
-    margin-left: 5px;
 }
 
 .color-accent {
@@ -88,13 +155,30 @@ h1 {
     font-weight: 700;
 }
 
-input {
-    margin: 0;
+input[type=range] {
+    margin: 0 0 20px 0;
+    width: 100%;
     outline: none;
-    width: 200px;
+    -webkit-appearance: none;
 }
 
-input:hover {
+input[type=range]::-webkit-slider-runnable-track {
+    height: 2px;
+    background-color: #1dd1a1;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    margin-top: -11px;
+    width: 24px;
+    height: 24px;
+    background-color: #1dd1a1;
+    border-radius: 50%;
+    transition: .2s ease;
+    -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.4);
     cursor: pointer;
 }
 
@@ -125,18 +209,23 @@ input:hover {
 .cards__item {
     width: 100px;
     height: 130px;
-    color: white;
+    font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    background-color: #fff;
     border-radius: 2px;
-    transition: .2s ease;
+    transition: .8s ease;
+}
+
+.cards__item_active {
+    transform: rotateY(180deg);
+}
+
+.cards__item_picture {
+    background-color: #c8d6e5;
 }
 
 .cards__item:hover {
-    transform: scale(1.1);
     cursor: pointer;
 }
 
@@ -152,5 +241,6 @@ input:hover {
 
 .cards__item_disabled {
     pointer-events: none;
-    opacity: 0.2;
+    opacity: 0.15;
+    transform: scale(.8);
 }

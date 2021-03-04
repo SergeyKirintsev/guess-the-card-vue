@@ -1,4 +1,4 @@
-const BACKGROUNDCOLOR = "#fff";
+const BACKGROUNDCOLOR = "#c8d6e5";
 const APPNAME = "darkweb";
 let setIntervalId;
 
@@ -106,6 +106,10 @@ export default {
         } else {
           targetEl.style.backgroundColor = BACKGROUNDCOLOR;
           compareTargetEl.style.backgroundColor = BACKGROUNDCOLOR;
+          targetEl.classList.remove('cards__item_active')
+          compareTargetEl.classList.remove('cards__item_active')
+          targetEl.classList.add('cards__item_picture')
+          compareTargetEl.classList.add('cards__item_picture')
         }
         this.compareCardsArr = [];
         this.stepCount++;
@@ -117,6 +121,8 @@ export default {
       if (!targetEl.classList.contains("cards__item")) {
         return;
       }
+      targetEl.classList.add('cards__item_active')
+      targetEl.classList.remove('cards__item_picture')
       const id = evt.target.id;
       const color = this.cards[id];
       targetEl.style.backgroundColor = color;
@@ -130,7 +136,20 @@ export default {
         setTimeout(() => this.saveBestResult(), 0);
         clearInterval(setIntervalId)
         setTimeout(() => {
-          alert(`Игра окончена. Ваш результат ${this.stepCount} ходов`);
+          // Наверняка можно сделать лучше
+          const popup = document.querySelector('.popup');
+          const popupText = document.querySelector('.popup__text')
+          const closePopupBtn = document.querySelector('.popup__close-btn')
+          popupText.textContent = `Ваш результат ${this.stepCount} ходов`
+          function showPopup() {
+            popup.classList.add('popup_opened');
+          }
+          function closePopup() {
+            popup.classList.remove('popup_opened');
+          }
+          showPopup();
+          closePopupBtn.addEventListener('click', closePopup)
+          // alert(`Игра окончена. Ваш результат ${this.stepCount} ходов`);
         }, 0);
       }
     },

@@ -1,6 +1,16 @@
 <template>
   <div class="page">
-    <h1>Найди одинаковые карточки</h1>
+    <!-- Попап -->
+    <div class="popup">
+      <div class="popup__content">
+        <p class="popup__title">Неплохо!</p>
+        <p class="popup__text"></p>
+        <button type="button" class="popup__close-btn">Продолжить</button>
+      </div>
+    </div>
+
+    <h1 class="title">Найди одинаковые карточки</h1>
+    <p class="copyright">&copy; Made by Sergey Kirintsev & Aleksei Andreev</p>
 
     <section class="game">
       <div class="game__config">
@@ -28,7 +38,7 @@
           Лучший результат: <span class="text-accent">{{ bestResult }}</span>
         </p>
         <p class="color-accent">
-          Кол-во ходов: <span class="text-accent">{{ stepCount }}</span>
+          Количество ходов: <span class="text-accent">{{ stepCount }}</span>
         </p>
         <p>Угадано: {{ guessCardsCount }}</p>
         <p>Осталось: {{ cardsCount - guessCardsCount }}</p>
@@ -41,7 +51,7 @@
           v-for="(color, idx) in cards"
           :key="idx"
           :id="idx"
-          class="cards__item"
+          class="cards__item cards__item_picture"
         ></li>
       </ul>
     </section>
