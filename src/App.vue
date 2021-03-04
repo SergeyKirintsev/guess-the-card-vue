@@ -1,11 +1,11 @@
 <template>
   <div class="page">
     <!-- Попап -->
-    <div class="popup">
+    <div ref="popup" class="popup">
       <div class="popup__content">
         <p class="popup__title">Неплохо!</p>
         <p class="popup__text">Ваш результат {{ this.stepCount }} ходов</p>
-        <button type="button" class="popup__close-btn">Продолжить</button>
+        <button @click="closePopup" type="button" class="popup__close-btn">Продолжить</button>
       </div>
     </div>
 
