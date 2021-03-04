@@ -3,16 +3,6 @@ const APPNAME = "darkweb";
 let setIntervalId;
 let popup;
 
-function startTimer() {
-  setIntervalId = setInterval(() => {
-    let timerEl = document.querySelector(".timer");
-    let timerCount = parseInt(timerEl.textContent, 10);
-    timerCount += 1;
-    timerEl.textContent = timerCount.toString() + " сек.";
-    // console.log(timerEl)
-  }, 1000);
-}
-
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -66,7 +56,8 @@ export default {
       compareCardsArr: [],
       stepCount: 0,
       guessCardsCount: 0,
-      bestResult: 0
+      bestResult: 0,
+      timerCount: 0,
     };
   },
 
@@ -86,7 +77,7 @@ export default {
       setTimeout(() => {
         this.cards = [...makeCards(this.cardsCount)];
       }, 0);
-      startTimer();
+      this.startTimer();
     },
 
     compareCards(id, color, targetEl) {
@@ -159,6 +150,12 @@ export default {
       const result = JSON.parse(localStorage.getItem(APPNAME)) || {};
       const bestResult = result[this.cardsCount];
       this.bestResult = bestResult || 0;
+    },
+
+    startTimer() {
+      setIntervalId = setInterval(() => {
+        this.timerCount++
+      }, 1000);
     }
   },
 

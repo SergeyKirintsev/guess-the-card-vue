@@ -6,7 +6,9 @@
         <p class="popup__title">Неплохо!</p>
         <div class="game__result game__result_place_popup">
           <h2>Ваш результат</h2>
-          <p>Таймер: <span class="timer">0</span></p>
+          <p>
+            Таймер: <span class="timer">{{ timerCount }} сек.</span>
+          </p>
           <p class="color-accent">
             Лучший результат: <span class="text-accent">{{ bestResult }}</span>
           </p>
@@ -45,7 +47,9 @@
 
         <div class="game__result">
           <h2>Ваш результат</h2>
-          <p>Таймер: <span class="timer">0</span></p>
+          <p>
+            Таймер: <span class="timer">{{ timerCount }} сек.</span>
+          </p>
           <p class="color-accent">
             Лучший результат: <span class="text-accent">{{ bestResult }}</span>
           </p>
