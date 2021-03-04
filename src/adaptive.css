@@ -24,8 +24,6 @@
 		display: none;
 	}
 	.game__result_place_popup {
-		max-width: 100%;
-		margin-top: 20px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -45,9 +43,6 @@
 }
 
 @media (max-width: 375px) {
-	.game__result_place_popup h2 {
-		font-size: 22px;
-	}
 	.header__title {
 		font-size: 24px;
 	}

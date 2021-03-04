@@ -57,13 +57,6 @@ body {
     font-weight: 700;
 }
 
-.popup__text {
-    margin: 0 0 20px 0;
-    max-width: 520px;
-    font-size: 24px;
-    font-weight: 700;
-}
-
 .popup__close-btn {
     box-sizing: border-box;
     margin-top: 20px;
@@ -157,7 +150,11 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 .game__result_place_popup {
-    display: none;
+    margin-top: 20px;
+}
+
+.game__result_place_popup p {
+    text-align: left;
 }
 
 .game__result h2 {

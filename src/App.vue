@@ -5,7 +5,7 @@
       <div class="popup__content">
         <p class="popup__title">Неплохо!</p>
         <div class="game__result game__result_place_popup">
-          <h2>Ваши результаты</h2>
+          <h2>Ваш результат</h2>
           <p>Таймер: <span class="timer">0</span></p>
           <p class="color-accent">
             Лучший результат: <span class="text-accent">{{ bestResult }}</span>

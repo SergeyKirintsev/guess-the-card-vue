@@ -9,6 +9,7 @@ function startTimer() {
     let timerCount = parseInt(timerEl.textContent, 10);
     timerCount += 1;
     timerEl.textContent = timerCount.toString() + " сек.";
+    // console.log(timerEl)
   }, 1000);
 }
 
