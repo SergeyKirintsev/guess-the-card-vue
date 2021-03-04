@@ -1,6 +1,7 @@
 const BACKGROUNDCOLOR = "#c8d6e5";
 const APPNAME = "darkweb";
 let setIntervalId;
+let popup;
 
 function startTimer() {
   setIntervalId = setInterval(() => {
@@ -132,18 +133,15 @@ export default {
       }, 1100);
     },
 
+    openPopup() {
+      popup.classList.add("popup_opened");
+    },
+
     checkStopGame() {
       if (this.cardsCount == this.guessCardsCount) {
         setTimeout(() => this.saveBestResult(), 0);
         clearInterval(setIntervalId);
-        setTimeout(() => {
-          const popup = document.querySelector(".popup");
-          const closePopupBtn = document.querySelector(".popup__close-btn");
-          closePopupBtn.addEventListener("click", () => {
-            popup.classList.remove("popup_opened");
-          });
-          popup.classList.add("popup_opened");
-        }, 0);
+        setTimeout(() => this.openPopup(), 1000);
       }
     },
 
@@ -161,5 +159,13 @@ export default {
       const bestResult = result[this.cardsCount];
       this.bestResult = bestResult || 0;
     }
+  },
+
+  mounted() {
+    popup = document.querySelector(".popup");
+    const closePopupBtn = document.querySelector(".popup__close-btn");
+    closePopupBtn.addEventListener("click", () => {
+      popup.classList.remove("popup_opened");
+    });
   }
 };
