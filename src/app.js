@@ -137,20 +137,12 @@ export default {
         setTimeout(() => this.saveBestResult(), 0);
         clearInterval(setIntervalId);
         setTimeout(() => {
-          // Наверняка можно сделать лучше
           const popup = document.querySelector(".popup");
-          // const popupText = document.querySelector('.popup__text')
           const closePopupBtn = document.querySelector(".popup__close-btn");
-          // popupText.textContent = `Ваш результат ${this.stepCount} ходов`
-          function showPopup() {
-            popup.classList.add("popup_opened");
-          }
-          function closePopup() {
+          closePopupBtn.addEventListener("click", () => {
             popup.classList.remove("popup_opened");
-          }
-          closePopupBtn.addEventListener("click", closePopup);
-          showPopup();
-          // alert(`Игра окончена. Ваш результат ${this.stepCount} ходов`);
+          });
+          popup.classList.add("popup_opened");
         }, 0);
       }
     },
