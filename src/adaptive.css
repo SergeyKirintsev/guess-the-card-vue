@@ -1,0 +1,60 @@
+@media (max-width: 620px) {
+	.page {
+		padding: 0 20px;
+	}
+	.header__title {
+		font-size: 26px;
+	}
+	.cards__list {
+		grid-template-columns: repeat(auto-fit, 80px);
+	}
+	.cards__item {
+		height: 110px;
+	}
+}
+
+@media (max-width: 520px) {
+	.game {
+		justify-content: center;
+	}
+	.game__config {
+		max-width: 100%;
+	}
+	.game__result {
+		display: none;
+	}
+	.game__result_place_popup {
+		max-width: 100%;
+		margin-top: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+@media (max-width: 425px) {
+	.popup__text {
+		font-size: 20px;
+	}
+	.cards__list {
+		grid-template-columns: repeat(auto-fit, 60px);
+	}
+	.cards__item {
+		height: 90px;
+	}
+}
+
+@media (max-width: 375px) {
+	.game__result_place_popup h2 {
+		font-size: 22px;
+	}
+	.header__title {
+		font-size: 24px;
+	}
+	.cards__list {
+		grid-template-columns: repeat(auto-fit, 50px);
+	}
+	.cards__item {
+		height: 80px;
+	}
+}

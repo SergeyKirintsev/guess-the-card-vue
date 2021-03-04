@@ -19,7 +19,6 @@ body {
 .page {
     max-width: 560px;
     margin: 0 auto;
-    padding: 40px 0;
 }
 
 .popup {
@@ -53,7 +52,7 @@ body {
 }
 
 .popup__title {
-    margin: 0 0 20px 0;
+    margin: 0;
     font-size: 40px;
     font-weight: 700;
 }
@@ -85,24 +84,20 @@ body {
     cursor: pointer;
 }
 
-.title {
+.header {
+    padding: 40px 0;
+}
+
+.header__title {
     margin: 0;
-    font-size: 32px;
+    font-size: 30px;
     font-weight: 700;
+    line-height: 1.5;
     text-transform: uppercase;
     text-align: center;
 }
 
-.copyright {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.2;
-}
-
 .game {
-    margin-top: 40px;
-    padding: 0 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -124,35 +119,6 @@ body {
 
 .game__form {
     margin-top: 20px;
-}
-
-.game__result {
-    box-sizing: border-box;
-    padding: 15px;
-    max-width: 250px;
-    border: 2px solid #fff;
-    border-radius: 4px;
-}
-
-.game__result h2 {
-    margin: 0 0 20px 0;
-}
-
-.game__result p {
-    margin: 0 0 10px 0;
-    font-weight: 500;
-}
-
-.game__result p:last-child {
-    margin-bottom: 0;
-}
-
-.color-accent {
-    color: #1dd1a1;
-}
-
-.text-accent {
-    font-weight: 700;
 }
 
 input[type=range] {
@@ -182,6 +148,39 @@ input[type=range]::-webkit-slider-thumb:hover {
     cursor: pointer;
 }
 
+.game__result {
+    box-sizing: border-box;
+    padding: 15px;
+    max-width: 250px;
+    border: 2px solid #fff;
+    border-radius: 4px;
+}
+
+.game__result_place_popup {
+    display: none;
+}
+
+.game__result h2 {
+    margin: 0 0 20px 0;
+}
+
+.game__result p {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+}
+
+.game__result p:last-child {
+    margin-bottom: 0;
+}
+
+.color-accent {
+    color: #1dd1a1;
+}
+
+.text-accent {
+    font-weight: 700;
+}
+
 .game__start-btn {
     box-sizing: border-box;
     margin-top: 20px;
@@ -203,13 +202,12 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 .cards {
-    margin-top: 40px;
+    padding-top: 40px;
 }
 
 .cards__item {
-    width: 100px;
+    width: 100%;
     height: 130px;
-    font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -243,4 +241,17 @@ input[type=range]::-webkit-slider-thumb:hover {
     pointer-events: none;
     opacity: 0.15;
     transform: scale(.8);
+}
+
+.footer {
+    padding: 40px 0;
+}
+
+.footer__copyright {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, .5);
+    text-align: center;
 }
