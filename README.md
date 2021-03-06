@@ -19,3 +19,7 @@ https://guess-the-card-87897.web.app
 + Добавить случайную генерацию цвета (реализовано частично, использовано 12 цветов)
 + Научиться командной разработке
 + Высадиться на Марсе
+---
+Курс по Vue.js от сообщества @vuejs_club
+
+https://youtube.com/playlist?list=PLvTBThJr861yMBhpKafII3HZLAYujuNWw
