@@ -6,7 +6,7 @@
   >
     <div ref="boxInner" :class="{ active: isActive }" class="flip-box-inner">
       <div class="flip-box-front">
-        <img src="../img/rubashka_1989.jpg" alt="Передняя сторона карточки" />
+        <!--        <img src="../img/rubashka_1989.jpg" alt="Передняя сторона карточки" />-->
       </div>
       <div class="flip-box-back" :style="{ backgroundColor: bgColor }"></div>
     </div>
@@ -40,8 +40,8 @@ export default {
 /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box {
   background-color: transparent;
-  /*width: 130px;*/
-  height: 130px;
+  width: 100%;
+  height: 100%;
   /* border: 1px solid #f1f1f1; */
   perspective: 500px;
   cursor: pointer;

@@ -15,8 +15,6 @@
           <p class="color-accent">
             Количество ходов: <span class="text-accent">{{ stepCount }}</span>
           </p>
-          <p>Угадано: {{ guessCardsCount }}</p>
-          <p>Осталось: {{ cardsCount - guessCardsCount }}</p>
         </div>
         <button @click="closePopup" type="button" class="popup__close-btn">
           Продолжить

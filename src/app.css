@@ -229,6 +229,7 @@ input[type=range]::-webkit-slider-thumb:hover {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fit, 100px);
+    grid-auto-rows: 130px;
     gap: 15px;
     margin: 0;
     padding: 0;

@@ -91,48 +91,10 @@ export default {
       this.startTimer();
     },
 
-    // compareCards(id, color, targetEl) {
-    //   if (this.compareCardsArr.length === 0) {
-    //     this.compareCardsArr = [id, color, targetEl];
-    //     return;
-    //   }
-    //   const [compareId, compareColor, compareTargetEl] = this.compareCardsArr;
-    //   if (id === compareId) {
-    //     return;
-    //   } else {
-    //     if (color === compareColor) {
-    //       targetEl.classList.add("cards__item_disabled");
-    //       compareTargetEl.classList.add("cards__item_disabled");
-    //       this.guessCardsCount += 2;
-    //       this.checkStopGame();
-    //     } else {
-    //       targetEl.classList.remove("cards__item_active");
-    //       compareTargetEl.classList.remove("cards__item_active");
-    //       targetEl.classList.add("cards__item_picture");
-    //       compareTargetEl.classList.add("cards__item_picture");
-    //     }
-    //     this.compareCardsArr = [];
-    //     this.stepCount++;
-    //   }
-    // },
-
-    // selectCard(evt) {
-    //   const targetEl = evt.target;
-    //   if (!targetEl.classList.contains("cards__item")) {
-    //     return;
-    //   }
-    //   targetEl.classList.add("cards__item_active");
-    //   targetEl.classList.remove("cards__item_picture");
-    //   const id = evt.target.id;
-    //   const color = this.cards[id];
-    //   targetEl.style.backgroundColor = color;
-    //   setTimeout(() => {
-    //     this.compareCards(id, color, targetEl);
-    //   }, 1100);
-    // },
-
     selectCardTwo(id) {
+      console.log("selectCardTwo");
       const card = this.cards[id];
+      if (card.isActive) return;
       card.isActive = true;
 
       if (this.compareCardsArr.length === 0) {
@@ -143,12 +105,15 @@ export default {
       const [compareCardId] = this.compareCardsArr;
       const compareCard = this.cards[compareCardId];
 
+      console.log(compareCardId, id);
+
       if (id === compareCardId) {
         return;
       } else {
         //TODO объект передается по ссылке, ДОРАБОТАТЬ!!!
         setTimeout(() => {
-          console.log(compareCardId, id);
+          console.log("setTimeout", compareCardId, id);
+
           if (card.color === compareCard.color) {
             card.isDisabled = true;
             compareCard.isDisabled = true;
@@ -160,7 +125,7 @@ export default {
           }
           this.compareCardsArr = [];
           this.stepCount++;
-        }, 850);
+        }, 700);
       }
     },
 
