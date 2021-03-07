@@ -1,3 +1,5 @@
+import Card from "./components/Card.vue";
+
 const BACKGROUNDCOLOR = "#c8d6e5";
 const APPNAME = "darkweb";
 
@@ -46,6 +48,9 @@ function makeCards(cardsCount) {
 
 export default {
   name: "App",
+  components: {
+    Card
+  },
 
   data() {
     return {

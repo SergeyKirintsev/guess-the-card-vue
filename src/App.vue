@@ -65,12 +65,9 @@
 
       <section class="cards">
         <ul @click="selectCard" class="cards__list">
-          <li
-            v-for="(color, idx) in cards"
-            :key="idx"
-            :id="idx"
-            class="cards__item cards__item_picture"
-          ></li>
+          <li v-for="(color, idx) in cards" :key="idx" :id="idx">
+            <Card :bgColor="color" />
+          </li>
         </ul>
       </section>
     </main>
