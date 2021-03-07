@@ -130,10 +130,12 @@ export default {
     },
 
     openPopup() {
+      document.querySelector('.body').classList.add('body_inactive')
       this.isShowPopup = true;
     },
 
     closePopup() {
+      document.querySelector('.body').classList.remove('body_inactive')
       this.isShowPopup = false;
     },
 

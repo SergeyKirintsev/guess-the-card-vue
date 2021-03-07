@@ -5,9 +5,7 @@
     class="flip-box"
   >
     <div ref="boxInner" :class="{ active: isActive }" class="flip-box-inner">
-      <div class="flip-box-front">
-        <!--        <img src="../img/rubashka_1989.jpg" alt="Передняя сторона карточки" />-->
-      </div>
+      <div class="flip-box-front"></div>
       <div class="flip-box-back" :style="{ backgroundColor: bgColor }"></div>
     </div>
   </div>
@@ -79,12 +77,10 @@ export default {
 /* Style the front side */
 .flip-box-front {
   background-color: rgb(200, 214, 229);
-  color: black;
-}
-
-.flip-box-front img {
-  object-fit: cover;
-  width: 100%;
+  background-image: url("../img/rubashka_1989.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 /* Style the back side */
