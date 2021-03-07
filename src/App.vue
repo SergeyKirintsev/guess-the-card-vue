@@ -33,7 +33,7 @@
           <p class="game__cards-count">{{ cardsCount }}</p>
           <form class="game__form">
             <input
-              v-model="cardsCount"
+              v-model.number="cardsCount"
               type="range"
               id="card-count"
               min="4"

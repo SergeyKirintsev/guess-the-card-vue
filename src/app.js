@@ -24,7 +24,7 @@ function makeCards(cardsCount) {
     "#5e412f"
   ];
   shuffle(colorArr);
-  const cardsArr = new Array(+cardsCount);
+  const cardsArr = new Array(cardsCount);
 
   let colorPosition = 0;
 
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       cards: [],
-      cardsCount: "10",
+      cardsCount: 10,
       compareCardsArr: [],
       stepCount: 0,
       guessCardsCount: 0,
@@ -130,7 +130,7 @@ export default {
     },
 
     checkStopGame() {
-      if (this.cardsCount == this.guessCardsCount) {
+      if (this.cardsCount === this.guessCardsCount) {
         setTimeout(() => this.saveBestResult(), 0);
         clearInterval(this.setIntervalId);
         setTimeout(() => this.openPopup(), 1000);
