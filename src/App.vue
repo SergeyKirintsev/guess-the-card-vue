@@ -64,9 +64,15 @@
       </section>
 
       <section class="cards">
-        <ul @click="selectCard" class="cards__list">
-          <li v-for="(color, idx) in cards" :key="idx" :id="idx">
-            <Card :bgColor="color" />
+        <ul class="cards__list">
+          <li v-for="(item, idx) in cards" :key="idx">
+            <Card
+              :bgColor="item.color"
+              :isActive="item.isActive"
+              :isDisabled="item.isDisabled"
+              :id="idx"
+              @select="selectCardTwo"
+            />
           </li>
         </ul>
       </section>
