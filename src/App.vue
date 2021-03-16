@@ -1,30 +1,17 @@
 <template>
   <div class="page">
-    <!-- Попап -->
-    <div :class="{ popup_opened: isShowPopup }" class="popup">
-      <div class="popup__content">
-        <p class="popup__title">Неплохо!</p>
-        <div class="game__result game__result_place_popup">
-          <h2>Ваш результат</h2>
-          <p>
-            Таймер: <span class="timer">{{ timerCount }} сек.</span>
-          </p>
-          <p class="color-accent">
-            Лучший результат: <span class="text-accent">{{ bestResult }}</span>
-          </p>
-          <p class="color-accent">
-            Количество ходов: <span class="text-accent">{{ stepCount }}</span>
-          </p>
-        </div>
-        <button @click="closePopup" type="button" class="popup__close-btn">
-          Продолжить
-        </button>
-      </div>
-    </div>
+    <PopupWithResult
+      v-show="isGameOver"
+      @close="closePopup"
+      :timerCount="this.timerCount"
+      :bestResult="this.bestResult"
+      :stepCount="this.stepCount"
+    />
 
     <header class="header">
       <h1 class="header__title">Найди одинаковые карточки</h1>
     </header>
+
     <main class="main">
       <section class="game">
         <div class="game__config">
@@ -45,20 +32,13 @@
           </button>
         </div>
 
-        <div class="game__result">
-          <h2>Ваш результат</h2>
-          <p>
-            Таймер: <span class="timer">{{ timerCount }} сек.</span>
-          </p>
-          <p class="color-accent">
-            Лучший результат: <span class="text-accent">{{ bestResult }}</span>
-          </p>
-          <p class="color-accent">
-            Количество ходов: <span class="text-accent">{{ stepCount }}</span>
-          </p>
-          <p>Угадано: {{ guessCardsCount }}</p>
-          <p>Осталось: {{ cardsCount - guessCardsCount }}</p>
-        </div>
+        <GameResult
+          :timerCount="this.timerCount"
+          :bestResult="this.bestResult"
+          :stepCount="this.stepCount"
+          :guessCardsCount="this.guessCardsCount"
+          :cardsCount="this.cardsCount"
+        />
       </section>
 
       <section class="cards">

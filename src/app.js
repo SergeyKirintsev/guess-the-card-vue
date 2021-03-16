@@ -1,4 +1,6 @@
 import Card from "./components/Card.vue";
+import PopupWithResult from "./components/PopupWithResult";
+import GameResult from "./components/GameResult";
 
 const APPNAME = "darkweb";
 
@@ -59,7 +61,9 @@ function makeCards(cardsCount) {
 export default {
   name: "App",
   components: {
-    Card
+    Card,
+    PopupWithResult,
+    GameResult
   },
 
   data() {
@@ -71,8 +75,8 @@ export default {
       guessCardsCount: 0,
       bestResult: 0,
       timerCount: 0,
-      isShowPopup: false,
-      setIntervalId: null
+      setIntervalId: null,
+      isGameOver: false
     };
   },
 
@@ -92,7 +96,6 @@ export default {
     },
 
     selectCardTwo(id) {
-      console.log("selectCardTwo");
       const card = this.cards[id];
       if (card.isActive) return;
       card.isActive = true;
@@ -105,15 +108,10 @@ export default {
       const [compareCardId] = this.compareCardsArr;
       const compareCard = this.cards[compareCardId];
 
-      console.log(compareCardId, id);
-
       if (id === compareCardId) {
         return;
       } else {
-        //TODO объект передается по ссылке, ДОРАБОТАТЬ!!!
         setTimeout(() => {
-          console.log("setTimeout", compareCardId, id);
-
           if (card.color === compareCard.color) {
             card.isDisabled = true;
             compareCard.isDisabled = true;
@@ -130,13 +128,12 @@ export default {
     },
 
     openPopup() {
-      document.querySelector('.body').classList.add('body_inactive')
-      this.isShowPopup = true;
+      // document.querySelector(".body").classList.add("body_inactive");
+      this.isGameOver = true;
     },
 
     closePopup() {
-      document.querySelector('.body').classList.remove('body_inactive')
-      this.isShowPopup = false;
+      this.isGameOver = false;
     },
 
     checkStopGame() {
