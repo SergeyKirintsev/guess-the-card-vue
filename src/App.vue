@@ -15,8 +15,6 @@
           <p class="color-accent">
             Количество ходов: <span class="text-accent">{{ stepCount }}</span>
           </p>
-          <p>Угадано: {{ guessCardsCount }}</p>
-          <p>Осталось: {{ cardsCount - guessCardsCount }}</p>
         </div>
         <button @click="closePopup" type="button" class="popup__close-btn">
           Продолжить
@@ -33,7 +31,7 @@
           <p class="game__cards-count">{{ cardsCount }}</p>
           <form class="game__form">
             <input
-              v-model="cardsCount"
+              v-model.number="cardsCount"
               type="range"
               id="card-count"
               min="4"
@@ -64,13 +62,16 @@
       </section>
 
       <section class="cards">
-        <ul @click="selectCard" class="cards__list">
-          <li
-            v-for="(color, idx) in cards"
-            :key="idx"
-            :id="idx"
-            class="cards__item cards__item_picture"
-          ></li>
+        <ul class="cards__list">
+          <li v-for="(item, idx) in cards" :key="idx">
+            <Card
+              :bgColor="item.color"
+              :isActive="item.isActive"
+              :isDisabled="item.isDisabled"
+              :id="idx"
+              @select="selectCardTwo"
+            />
+          </li>
         </ul>
       </section>
     </main>

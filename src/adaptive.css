@@ -7,9 +7,7 @@
 	}
 	.cards__list {
 		grid-template-columns: repeat(auto-fit, 80px);
-	}
-	.cards__item {
-		height: 110px;
+		grid-auto-rows: 110px;
 	}
 }
 
@@ -36,9 +34,7 @@
 	}
 	.cards__list {
 		grid-template-columns: repeat(auto-fit, 60px);
-	}
-	.cards__item {
-		height: 90px;
+		grid-auto-rows: 90px;
 	}
 }
 
@@ -48,8 +44,6 @@
 	}
 	.cards__list {
 		grid-template-columns: repeat(auto-fit, 50px);
-	}
-	.cards__item {
-		height: 80px;
+		grid-auto-rows: 80px;
 	}
 }

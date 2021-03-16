@@ -1,5 +1,14 @@
-const BACKGROUNDCOLOR = "#c8d6e5";
+import Card from "./components/Card.vue";
+
 const APPNAME = "darkweb";
+
+class ColorCard {
+  constructor(color) {
+    this.color = color;
+  }
+  isActive = false;
+  isDisabled = false;
+}
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -24,15 +33,18 @@ function makeCards(cardsCount) {
     "#5e412f"
   ];
   shuffle(colorArr);
-  const cardsArr = new Array(+cardsCount);
+  const cardsArr = new Array(cardsCount);
 
   let colorPosition = 0;
 
   for (let i = 0; i < cardsArr.length / 2; i++) {
     const color = colorArr[colorPosition];
 
-    cardsArr[i] = color;
-    cardsArr[cardsArr.length - 1 - i] = color;
+    const firstCard = new ColorCard(color);
+    const secondCard = Object.assign({}, firstCard);
+
+    cardsArr[i] = firstCard;
+    cardsArr[cardsArr.length - 1 - i] = secondCard;
 
     if (colorPosition === colorArr.length - 1) {
       colorPosition = 0;
@@ -46,11 +58,14 @@ function makeCards(cardsCount) {
 
 export default {
   name: "App",
+  components: {
+    Card
+  },
 
   data() {
     return {
       cards: [],
-      cardsCount: "10",
+      cardsCount: 10,
       compareCardsArr: [],
       stepCount: 0,
       guessCardsCount: 0,
@@ -63,7 +78,6 @@ export default {
 
   methods: {
     resetGame() {
-      this.cards = [];
       this.stepCount = 0;
       this.guessCardsCount = 0;
       clearInterval(this.setIntervalId);
@@ -73,64 +87,60 @@ export default {
     startGame() {
       this.resetGame();
       this.loadBestResult();
-      setTimeout(() => {
-        this.cards = [...makeCards(this.cardsCount)];
-      }, 0);
+      this.cards = [...makeCards(this.cardsCount)];
       this.startTimer();
     },
 
-    compareCards(id, color, targetEl) {
+    selectCardTwo(id) {
+      console.log("selectCardTwo");
+      const card = this.cards[id];
+      if (card.isActive) return;
+      card.isActive = true;
+
       if (this.compareCardsArr.length === 0) {
-        this.compareCardsArr = [id, color, targetEl];
+        this.compareCardsArr = [id];
         return;
       }
-      const [compareId, compareColor, compareTargetEl] = this.compareCardsArr;
-      if (id === compareId) {
+
+      const [compareCardId] = this.compareCardsArr;
+      const compareCard = this.cards[compareCardId];
+
+      console.log(compareCardId, id);
+
+      if (id === compareCardId) {
         return;
       } else {
-        if (color === compareColor) {
-          targetEl.classList.add("cards__item_disabled");
-          compareTargetEl.classList.add("cards__item_disabled");
-          this.guessCardsCount += 2;
-          this.checkStopGame();
-        } else {
-          targetEl.style.backgroundColor = BACKGROUNDCOLOR;
-          compareTargetEl.style.backgroundColor = BACKGROUNDCOLOR;
-          targetEl.classList.remove("cards__item_active");
-          compareTargetEl.classList.remove("cards__item_active");
-          targetEl.classList.add("cards__item_picture");
-          compareTargetEl.classList.add("cards__item_picture");
-        }
-        this.compareCardsArr = [];
-        this.stepCount++;
-      }
-    },
+        //TODO объект передается по ссылке, ДОРАБОТАТЬ!!!
+        setTimeout(() => {
+          console.log("setTimeout", compareCardId, id);
 
-    selectCard(evt) {
-      const targetEl = evt.target;
-      if (!targetEl.classList.contains("cards__item")) {
-        return;
+          if (card.color === compareCard.color) {
+            card.isDisabled = true;
+            compareCard.isDisabled = true;
+            this.guessCardsCount += 2;
+            this.checkStopGame();
+          } else {
+            card.isActive = false;
+            compareCard.isActive = false;
+          }
+          this.compareCardsArr = [];
+          this.stepCount++;
+        }, 700);
       }
-      targetEl.classList.add("cards__item_active");
-      targetEl.classList.remove("cards__item_picture");
-      const id = evt.target.id;
-      const color = this.cards[id];
-      targetEl.style.backgroundColor = color;
-      setTimeout(() => {
-        this.compareCards(id, color, targetEl);
-      }, 1100);
     },
 
     openPopup() {
+      document.querySelector('.body').classList.add('body_inactive')
       this.isShowPopup = true;
     },
 
     closePopup() {
+      document.querySelector('.body').classList.remove('body_inactive')
       this.isShowPopup = false;
     },
 
     checkStopGame() {
-      if (this.cardsCount == this.guessCardsCount) {
+      if (this.cardsCount === this.guessCardsCount) {
         setTimeout(() => this.saveBestResult(), 0);
         clearInterval(this.setIntervalId);
         setTimeout(() => this.openPopup(), 1000);
